@@ -25,7 +25,9 @@ use App\Http\Livewire\LivewireToaster;
 */
 
 Route::get('livewire-toaster', LivewireToaster::class);
-
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
