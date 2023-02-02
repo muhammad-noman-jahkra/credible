@@ -10,6 +10,6 @@ class TaskMeta extends Model
     use HasFactory;
 
     public function TaskMetaEmployee(){
-        return $this->hasOne('App\Models\Employee','id','claimBy');
+        return $this->hasOne('App\Models\employee','id','claimBy');
     }
 }
