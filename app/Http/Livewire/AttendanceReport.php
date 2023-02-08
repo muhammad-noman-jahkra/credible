@@ -13,6 +13,7 @@ use Brian2694\Toastr\Facades\Toastr;
 
 use function PHPUnit\Framework\isEmpty;
 use Carbon\Carbon;
+use App\Helpers\AppHelper;
 
 
 class AttendanceReport extends Component
@@ -28,11 +29,15 @@ class AttendanceReport extends Component
     public $totalAttendDays;
     public $totalWorkingHours;
     public $updateMode = false;
+    public $totalWorkingDaysInMonth;
+    public $totalWorkingHoursInMonth;
     
     public function mount()
     {
         $this->empList = employee::pluck('name','id');
-        $this->empName ='';
+        
+        $this->totalWorkingDaysInMonth = 0 ;
+        $this->totalWorkingHoursInMonth = $this->totalWorkingDaysInMonth* config('constants.options.office_working_hours') ;
 
         $mo = [];
         for ($m=1; $m<=12; $m++) {
@@ -99,6 +104,11 @@ class AttendanceReport extends Component
                 $this->totalWorkingHours = $this->totalWorkingHours + $r->calAttendanceWorkingHour();
             }
         }
+
+        $this->totalWorkingDaysInMonth = AppHelper::instance()->countDays($this->year,$this->month,[]);
+
+        $this->totalWorkingHoursInMonth = $this->totalWorkingDaysInMonth * config('constants.options.office_working_hours') ;
+
 
         $this->updateMode = true;
         $this->att = $result;

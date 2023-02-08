@@ -305,10 +305,13 @@
 		{!! Toastr::message() !!}
 		<!-- /Header -->
 		<!-- Sidebar -->
-		@if (Auth::user()->hasRole(['SUPER_ADMIN','ADMIN']))
-			@include('sidebar.adminSidebar')
-		@elseif (Auth::user()->hasRole(['EMPLOYEE']))
-			@include('sidebar.empSidebar')
+		
+		@if (Auth::check())
+			@if (Auth::user()->hasRole(['SUPER_ADMIN','ADMIN']))
+				@include('sidebar.adminSidebar')
+			@elseif (Auth::user()->hasRole(['EMPLOYEE']))
+				@include('sidebar.empSidebar')
+			@endif
 		@endif
 		<!-- /Sidebar -->
 		<!-- Page Wrapper -->

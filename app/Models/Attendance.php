@@ -21,7 +21,7 @@ class Attendance extends Model
     public function calAttendanceWorkingHour(){
         $start_datetime = new DateTime($this->in_time); 
         // dd(date("Y-m-d H:i:s"));
-        $diff = $start_datetime->diff(new DateTime(!empty($this->out_time) ? $this->out_time: $start_datetime)); 
+        $diff = $start_datetime->diff(new DateTime(!empty($this->out_time) ? $this->out_time: $this->in_time)); 
 // dd([$diff,$start_datetime,new DateTime(!empty($this->out_time) ? $this->out_time: date("Y-m-d H:i:s"))]);
         $total_hr = ($diff->days * 24); 
         $total_hr += $diff->h; 
