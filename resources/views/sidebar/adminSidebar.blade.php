@@ -41,6 +41,15 @@
                         <li><a href="{{route('report.attendance')}}">Attendance Report</a></li>
                     </ul>
                 </li>
+                <li class="submenu">
+                    <a href="#" class="">
+                        <i class="la la-user"></i>
+                        <span> Master Entry</span> <span class="menu-arrow"></span>
+                    </a>
+                    <ul >
+                        <li><a href="{{route('holiday.index')}}">Holidays</a></li>
+                    </ul>
+                </li>
                 
             </ul>
         </div>

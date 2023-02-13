@@ -10,6 +10,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskMetaController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\HolidaysController;
 use App\Models\Attendance;
 use App\Http\Livewire\LivewireToaster;
 use Illuminate\Support\Facades\Artisan;
@@ -56,6 +57,7 @@ Route::middleware([
     Route::resource('task', TaskController::class);
     Route::resource('taskMeta', TaskMetaController::class);
     Route::resource('customer', CustomerController::class);
+    Route::resource('holiday', HolidaysController::class);
     
     Route::post('/task-updates/{taskId}', [TaskController::class,'taskUpdates'])->name('task.updates');
     Route::get('/report/attendance', [ReportController::class,'attendanceReport'])->name('report.attendance');

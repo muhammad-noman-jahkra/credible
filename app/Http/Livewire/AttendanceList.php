@@ -86,10 +86,10 @@ class AttendanceList extends Component
         $attendance = Attendance::findOrFail($id);
 
         $this->attendance_id = $id;
-        $this->punch_in_hour = Carbon::createFromFormat('Y-m-d H:i:s', $attendance->in_time)->format('H');
-        $this->punch_in_min = Carbon::createFromFormat('Y-m-d H:i:s', $attendance->in_time)->format('i');
-        $this->punch_out_hour = Carbon::createFromFormat('Y-m-d H:i:s', $attendance->out_time)->format('H');
-        $this->punch_out_min =  Carbon::createFromFormat('Y-m-d H:i:s', $attendance->out_time)->format('i');
+        $this->punch_in_hour = ltrim(Carbon::createFromFormat('Y-m-d H:i:s', $attendance->in_time)->format('H'), "0");
+        $this->punch_in_min = ltrim(Carbon::createFromFormat('Y-m-d H:i:s', $attendance->in_time)->format('i'),"0");
+        $this->punch_out_hour = ltrim(Carbon::createFromFormat('Y-m-d H:i:s', empty($attendance->out_time) ? $attendance->in_time : $attendance->out_time )->format('H'),"0");
+        $this->punch_out_min =  ltrim(Carbon::createFromFormat('Y-m-d H:i:s', empty($attendance->out_time) ? $attendance->in_time : $attendance->out_time )->format('i'),"0");
   
         $this->updateMode = true;
     }

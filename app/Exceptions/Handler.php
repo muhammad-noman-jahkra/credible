@@ -44,20 +44,29 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            $this->reportable(function (Throwable $e) {
+                $this->sendEmail($e);
+            });
         });
     }
 
-    public function render($request, Throwable $exception)
+    public function sendEmail(Throwable $exception)
     {
-        
-        if(env('APP_DEBUG') == false)
-        {
-            return response()->view('errors.error', ['message'=>'Technical Issue found, Kindly contact with support team'], 500);   
-        }else{
-            dd($exception);
-        }
-
-        
+    //    try {
+   
+    //         $content['message'] = $exception->getMessage();
+    //         $content['file'] = $exception->getFile();
+    //         $content['line'] = $exception->getLine();
+    //         $content['trace'] = $exception->getTrace();
+  
+    //         $content['url'] = request()->url();
+    //         $content['body'] = request()->all();
+    //         $content['ip'] = request()->ip();
+   
+    //         Mail::to('your_email@gmail.com')->send(new ExceptionOccured($content));
+  
+    //     } catch (Throwable $exception) {
+    //         Log::error($exception);
+    //     }
     }
 }
