@@ -29,6 +29,9 @@ Route::get('livewire-toaster', LivewireToaster::class);
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
