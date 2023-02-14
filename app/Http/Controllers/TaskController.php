@@ -259,18 +259,19 @@ class TaskController extends Controller
                     $tt->task_meta_id_end = $tm->id;
                     $tt->end_time = date("Y-m-d h:i:s");
                     $tt->save();
+                    if(!empty($request->file('files'))){
+                        foreach($request->file('files') as $key => $file)
+                        {
+                            $path = $file->store($task->id,'taskAttachments');
+                            $ta = New TaskAttachements();
+                            $ta->task_id = $task->id;
+                            // dd($request->file('files')[$index]);
+                            $ta->task_attachment_url =  $path;
+                            $ta->task_meta_id =  $tm->id;
+                            $ta->filename = $file->getClientOriginalName();
+                            $ta->save();
 
-                    foreach($request->file('files') as $key => $file)
-                    {
-                        $path = $file->store($task->id,'taskAttachments');
-                        $ta = New TaskAttachements();
-                        $ta->task_id = $task->id;
-                        // dd($request->file('files')[$index]);
-                        $ta->task_attachment_url =  $path;
-                        $ta->task_meta_id =  $tm->id;
-                        $ta->filename = $file->getClientOriginalName();
-                        $ta->save();
-
+                        }
                     }
 
                     DB::commit();
@@ -315,17 +316,19 @@ class TaskController extends Controller
                         $ntt->save();
                     }
 
-                    foreach($request->file('files') as $key => $file)
-                    {
-                        $path = $file->store($task->id,'taskAttachments');
-                        $ta = New TaskAttachements();
-                        $ta->task_id = $task->id;
-                        // dd($request->file('files')[$index]);
-                        $ta->task_attachment_url =  $path;
-                        $ta->task_meta_id =  $tm->id;
-                        $ta->filename = $file->getClientOriginalName();
-                        $ta->save();
+                    if(!empty($request->file('files'))){
+                        foreach($request->file('files') as $key => $file)
+                        {
+                            $path = $file->store($task->id,'taskAttachments');
+                            $ta = New TaskAttachements();
+                            $ta->task_id = $task->id;
+                            // dd($request->file('files')[$index]);
+                            $ta->task_attachment_url =  $path;
+                            $ta->task_meta_id =  $tm->id;
+                            $ta->filename = $file->getClientOriginalName();
+                            $ta->save();
 
+                        }
                     }
                     DB::commit();
                     Toastr::success('Task completed :)','Success');
@@ -365,18 +368,19 @@ class TaskController extends Controller
                     $tt->start_time = date("Y-m-d h:i:s");
                     $tt->save();
                 }
-                
-                foreach($request->file('files') as $key => $file)
-                {
-                    $path = $file->store($task->id,'taskAttachments');
-                    $ta = New TaskAttachements();
-                    $ta->task_id = $task->id;
-                    // dd($request->file('files')[$index]);
-                    $ta->task_attachment_url =  $path;
-                    $ta->task_meta_id =  $tm->id;
-                    $ta->filename = $file->getClientOriginalName();
-                    $ta->save();
+                if(!empty($request->file('files'))){
+                    foreach($request->file('files') as $key => $file)
+                    {
+                        $path = $file->store($task->id,'taskAttachments');
+                        $ta = New TaskAttachements();
+                        $ta->task_id = $task->id;
+                        // dd($request->file('files')[$index]);
+                        $ta->task_attachment_url =  $path;
+                        $ta->task_meta_id =  $tm->id;
+                        $ta->filename = $file->getClientOriginalName();
+                        $ta->save();
 
+                    }
                 }
 
                 DB::commit();
