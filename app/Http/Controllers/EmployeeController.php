@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -204,5 +205,19 @@ class EmployeeController extends Controller
     public function destroy(employee $employee)
     {
         //
+    }
+    
+    public function updateEmpPassword()
+    {
+        if($_POST['password'] == $_POST['confirm_password']){
+            $user = Auth::user();
+            $user->password = bcrypt($_POST['password']);
+            $user->save();
+            Toastr::success('Password has been updated :)','Success');
+            return redirect()->route('home');
+        }else{
+            Toastr::error('password and confirm Passwor must be same :(','Error');
+            return redirect()->back();
+        }
     }
 }

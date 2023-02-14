@@ -41,6 +41,7 @@ Route::middleware([
     Route::get('/', [DashboardController::class,'dashboard'])->name('home');
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     Route::get('/emp/add', [EmployeeController::class,'create'])->name('employee.add');
+    Route::post('/update-emp-password', [EmployeeController::class,'updateEmpPassword'])->name('emp.updatePassword');
 
     
 

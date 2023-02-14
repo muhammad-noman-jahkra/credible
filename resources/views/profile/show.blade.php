@@ -1,45 +1,50 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
-
-                <x-jet-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+@extends('layouts.dashboard')
+@section('content')
+  
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <!-- Page Content -->
+        <div class="content container-fluid">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">{{ __('Update Password') }}</h3>         
+                        <h5 >{{ __('Ensure your account is using a long, random password to stay secure.') }}</h5>                        
+                    </div>                   
                 </div>
-
-                <x-jet-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-jet-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
             </div>
+			<!-- /Page Header -->
 
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-jet-section-border />
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
+            <form action="{{route('emp.updatePassword')}}" method="POST">
+                @csrf
+                <div class="row ">
+                    <div class="col-sm-6 col-md-3">  
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control floating" name="password">
+                            <label class="focus-label">New Password</label>
+                        </div>
+                    </div>
                 </div>
-            @endif
+                <div class="row ">
+                    <div class="col-sm-6 col-md-3">  
+                        <div class="form-group form-focus">
+                            <input type="password" class="form-control floating" name="confirm_password">
+                            <label class="focus-label">Confirm Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-6 col-md-3">  
+                        <button type="sumit" class="btn btn-success btn-block"> Update </button>  
+                    </div>
+                </div>
+            </form>            
+            
         </div>
+        <!-- /Page Content -->
+      
     </div>
-</x-app-layout>
+    <!-- /Page Wrapper -->
+   
+@endsection

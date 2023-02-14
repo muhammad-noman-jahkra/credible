@@ -16,6 +16,12 @@
                         <span>Task List</span></span>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{{route('profile.show')}}" class="">
+                        <i class="la la-list"></i>
+                        <span>Profile</span></span>
+                    </a>
+                </li>
                 
             </ul>
         </div>
