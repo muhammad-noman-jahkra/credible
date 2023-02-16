@@ -63,7 +63,7 @@
 		<div class="header">
 			<!-- Logo -->
 			<div class="header-left">
-				<a href="#" class="logo">
+				<a href="{{route('home')}}" class="logo">
 					<img src="{{ URL::to('/assets/images/product_logo.png') }}" width="200" height="50" alt="">
 				</a>
 			</div>

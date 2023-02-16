@@ -20,7 +20,7 @@ class AppHelper
         $counter = mktime(0, 0, 0, $month, 1, $year);
         while (date("n", $counter) == $month) {
             
-            if (in_array(date("w", $counter), $ignore) == false && !in_array(date("Y-m-d",$counter),$holidayList)) {
+            if (in_array(date("w", $counter), $ignore) == false && in_array(date("Y-m-d",$counter),$holidayList) == false) {
                 $count++;
             }
             $counter = strtotime("+1 day", $counter);
