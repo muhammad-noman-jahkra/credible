@@ -36,6 +36,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    "checkUser",
 ])->group(function () {
 
     Route::get('/', [DashboardController::class,'dashboard'])->name('home');

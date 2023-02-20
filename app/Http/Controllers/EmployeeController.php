@@ -11,6 +11,7 @@ use DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendEmailJob;
 
 class EmployeeController extends Controller
 {
@@ -214,6 +215,12 @@ class EmployeeController extends Controller
             $user->password = bcrypt($_POST['password']);
             $user->save();
             Toastr::success('Password has been updated :)','Success');
+            $details = [
+                'to_email'=> $user->email,
+                'mail_data'=>['password'=>$_POST['password'],'user_name'=>$user->name],
+                'template'=>'password-reset-email'
+            ];
+            dispatch(new SendEmailJob($details));
             return redirect()->route('home');
         }else{
             Toastr::error('password and confirm Passwor must be same :(','Error');
