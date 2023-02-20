@@ -32,6 +32,9 @@ Route::get('/linkstorage', function () {
 Route::get('/migrate', function () {
     Artisan::call('migrate');
 });
+Route::get('/start-queue', function () {
+    Artisan::call('queue:work');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
