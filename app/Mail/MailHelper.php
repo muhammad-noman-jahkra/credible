@@ -33,6 +33,7 @@ class MailHelper extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.'.$this->template);
+        return $this->view('emails.'.$this->template)
+        ->subject($this->mailData['subject']??'Credible Email');
     }
 }

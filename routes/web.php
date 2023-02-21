@@ -35,6 +35,10 @@ Route::get('/migrate', function () {
 Route::get('/start-queue', function () {
     Artisan::call('queue:work');
 });
+Route::get('/start-schedule', function () {
+    Artisan::call('schedule:run');
+});
+Route::get('/test', [EmployeeController::class,'test']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

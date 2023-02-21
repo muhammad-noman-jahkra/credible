@@ -39,6 +39,8 @@ class SendEmailJob implements ShouldQueue
     public function handle()
     {
         $email = new MailHelper($this->details['mail_data'],$this->details['template']);
-        Mail::to($this->details['to_email'])->send($email);
+        Mail::to($this->details['to_email'])
+        ->bcc('support@expeditious.pk','Credible')        
+        ->send($email);
     }
 }
