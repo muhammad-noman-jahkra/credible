@@ -11,6 +11,7 @@ use App\Http\Controllers\TaskMetaController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\HolidaysController;
+use App\Http\Controllers\CronController;
 use App\Models\Attendance;
 use App\Http\Livewire\LivewireToaster;
 use Illuminate\Support\Facades\Artisan;
@@ -38,7 +39,7 @@ Route::get('/start-queue', function () {
 Route::get('/start-schedule', function () {
     Artisan::call('schedule:run');
 });
-Route::get('/test', [EmployeeController::class,'test']);
+Route::get('/check-attendance', [CronController::class,'checkAttendance'])->name('check.attendance');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

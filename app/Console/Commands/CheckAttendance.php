@@ -30,7 +30,7 @@ class CheckAttendance extends Command
      */
     public function handle()
     {
-        $todaysAttendance = Attendance::where(['day'=>Carbon::now()->format('Y-m-d')])->whereNull('out_time')->get();
+        $todaysAttendance = Attendance::where(['day'=>Carbon::now()->format('Y-m-21')])->whereNull('out_time')->get();
         
         $empList = array();
 
