@@ -11,7 +11,7 @@ class CronController extends Controller
 {
     public function checkAttendance(){
 
-        $todaysAttendance = Attendance::where(['day'=>Carbon::now()->format('Y-m-21')])->whereNull('out_time')->get();
+        $todaysAttendance = Attendance::where(['day'=>Carbon::now()->format('Y-m-d')])->whereNull('out_time')->get();
         
         $empList = array();
 
@@ -34,5 +34,9 @@ class CronController extends Controller
         }
         
         
+    }
+
+    public function testing(Request $request){
+        dd(file_get_contents('http://www.geoplugin.net/json.gp?ip='.$request->ip()));
     }
 }

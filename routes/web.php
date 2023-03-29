@@ -39,7 +39,9 @@ Route::get('/start-queue', function () {
 Route::get('/start-schedule', function () {
     Artisan::call('schedule:run');
 });
+
 Route::get('/check-attendance', [CronController::class,'checkAttendance'])->name('check.attendance');
+Route::get('/testing', [CronController::class,'testing']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
